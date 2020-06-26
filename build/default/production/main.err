@@ -1,0 +1,5 @@
+Warning[207] E:\TAREAS\SC\NRF_TRANSMITTER.X\SPI.INC 20 : Found label after column 1. (esperar_lectura)
+Warning[207] E:\TAREAS\SC\NRF_TRANSMITTER.X\SPI.INC 30 : Found label after column 1. (esperar)
+Warning[207] E:\TAREAS\SC\NRF_TRANSMITTER.X\MAIN.ASM 35 : Found label after column 1. (EXIT_ISR)
+Warning[207] E:\TAREAS\SC\NRF_TRANSMITTER.X\MAIN.ASM 76 : Found label after column 1. (read_adc)
+Warning[207] E:\TAREAS\SC\NRF_TRANSMITTER.X\MAIN.ASM 78 : Found label after column 1. (wait_adc)

@@ -1,0 +1,5 @@
+
+SPI_SCK equ RB1
+SPI_SDI equ RB0
+SPI_SDO equ RC7
+SPI_SS equ RA5
