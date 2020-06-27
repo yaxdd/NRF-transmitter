@@ -79,8 +79,8 @@ START
     btfss PIR1,ADIF
     bra wait_adc
     bcf PIR1,ADIF
-    movff ADRESH,BUFFER_DATA
-    movff ADRESL,BUFFER_DATA+1
+    movff ADRESH,BUFFER_DATA+1
+    movff ADRESL,BUFFER_DATA
     call NRF_SEND_DATA
     bra read_adc		  ;esperamos las interrupciones
     END
