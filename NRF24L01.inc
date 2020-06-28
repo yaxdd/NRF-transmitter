@@ -78,10 +78,10 @@ NRF_WRITE_BUFFER_2
     iorlw W_REGISTER
     movwf TXDATA
     call SPI_WRITE
-    movf BUFFER_DATA+1,W
+    movf BUFFER_DATA,W
     movwf TXDATA
     call SPI_WRITE
-    movf BUFFER_DATA,W
+    movf BUFFER_DATA+1,W
     movwf TXDATA
     call SPI_WRITE
     bsf PORTB, RB2
