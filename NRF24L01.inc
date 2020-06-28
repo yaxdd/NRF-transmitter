@@ -88,17 +88,17 @@ NRF_WRITE_BUFFER_2
     return
 NRF_SEND_DATA
     call NRF_FLUSH		;limpiamos las colas
-    movf W_TX_PAYLOAD,W
+    movlw W_TX_PAYLOAD
     movwf COMMAND
     call NRF_WRITE_BUFFER_2
     movlw 0x70
     movwf DATA_TO_SEND
-    movf STATUS_VAL,W
+    movlw STATUS_VAL
     movwf COMMAND
     call NRF_WRITE_REGISTER ;limpiamos las banderas
     movlw 0x02
     movwf DATA_TO_SEND
-    movf CONFIG_VAL,W
+    movlw CONFIG_VAL
     movwf COMMAND
     call NRF_WRITE_REGISTER ;colocamos en modo TX [prim_RX:0]
     bsf PORTB,RB3
@@ -109,19 +109,19 @@ NRF_SET_TX_MODE
     call NRF_FLUSH	    ;limpiamos las colas
     movlw 0x70
     movwf DATA_TO_SEND
-    movf STATUS_VAL,W
+    movlw STATUS_VAL
     movwf COMMAND
     call NRF_WRITE_REGISTER ;limpiamos las banderas
     movlw 0x02
     movwf DATA_TO_SEND
-    movf CONFIG_VAL,W
+    movlw CONFIG_VAL
     movwf COMMAND
     call NRF_WRITE_REGISTER ;colocamos en modo TX [prim_RX:0]
     return
 NRF_READ_REGISTER
     bcf PORTB, RB2
     movf COMMAND,W
-    iorlw W_REGISTER
+    iorlw R_REGISTER
     movwf TXDATA
     call SPI_WRITE
     call SPI_READ

@@ -1,4 +1,4 @@
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  1
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00030   CONFIG  ICPRT = OFF           ; Dedicated In-Circuit Debug/Programming Port (ICPORT) Enable bit (ICPOR
                             T disabled)
                       00031   CONFIG  XINST = OFF           ; Extended Instruction Set Enable bit (Instruction set extension and Ind
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  2
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00000A 6EC7           00009     movwf SSPSTAT
 00000C 0E20           00010     movlw 0x20      ; [WCOL:0][SSPOV:0][SSPEN:1][CKP:0][SSPM3-SSPM0:0000]
 00000E 6EC6           00011     movwf SSPCON1
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  3
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ Warning[207]: Found label after column 1. (esperar)
   0000000E            00022 RX_ADDR_P4  EQU 0x0E
   0000000F            00023 RX_ADDR_P5  EQU 0x0F
   00000010            00024 TX_ADDR     EQU 0x10
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  4
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00005E                00075 NRF_WRITE_BUFFER_2
 00005E 9481           00076     bcf PORTB, RB2
 000060 50??           00077     movf COMMAND,W
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  5
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -253,17 +253,17 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00007C 0012           00088     return
 00007E                00089 NRF_SEND_DATA
 00007E EC?? F???      00090     call NRF_FLUSH              ;limpiamos las colas
-000082 51A0           00091     movf W_TX_PAYLOAD,W
+000082 0EA0           00091     movlw W_TX_PAYLOAD
 000084 6E??           00092     movwf COMMAND
 000086 EC?? F???      00093     call NRF_WRITE_BUFFER_2
 00008A 0E70           00094     movlw 0x70
 00008C 6E??           00095     movwf DATA_TO_SEND
-00008E 5007           00096     movf STATUS_VAL,W
+00008E 0E07           00096     movlw STATUS_VAL
 000090 6E??           00097     movwf COMMAND
 000092 EC?? F???      00098     call NRF_WRITE_REGISTER ;limpiamos las banderas
 000096 0E02           00099     movlw 0x02
 000098 6E??           00100     movwf DATA_TO_SEND
-00009A 5000           00101     movf CONFIG_VAL,W
+00009A 0E00           00101     movlw CONFIG_VAL
 00009C 6E??           00102     movwf COMMAND
 00009E EC?? F???      00103     call NRF_WRITE_REGISTER ;colocamos en modo TX [prim_RX:0]
 0000A2 8681           00104     bsf PORTB,RB3
@@ -274,26 +274,26 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000AC EC?? F???      00109     call NRF_FLUSH          ;limpiamos las colas
 0000B0 0E70           00110     movlw 0x70
 0000B2 6E??           00111     movwf DATA_TO_SEND
-0000B4 5007           00112     movf STATUS_VAL,W
+0000B4 0E07           00112     movlw STATUS_VAL
 0000B6 6E??           00113     movwf COMMAND
 0000B8 EC?? F???      00114     call NRF_WRITE_REGISTER ;limpiamos las banderas
 0000BC 0E02           00115     movlw 0x02
 0000BE 6E??           00116     movwf DATA_TO_SEND
-0000C0 5000           00117     movf CONFIG_VAL,W
+0000C0 0E00           00117     movlw CONFIG_VAL
 0000C2 6E??           00118     movwf COMMAND
 0000C4 EC?? F???      00119     call NRF_WRITE_REGISTER ;colocamos en modo TX [prim_RX:0]
 0000C8 0012           00120     return
 0000CA                00121 NRF_READ_REGISTER
 0000CA 9481           00122     bcf PORTB, RB2
 0000CC 50??           00123     movf COMMAND,W
-0000CE 0920           00124     iorlw W_REGISTER
+0000CE 0900           00124     iorlw R_REGISTER
 0000D0 6E??           00125     movwf TXDATA
 0000D2 EC?? F???      00126     call SPI_WRITE
 0000D6 EC?? F???      00127     call SPI_READ
 0000DA 8481           00128     bsf PORTB, RB2
 0000DC 0012           00129     return
 0000DE                00130 NRF_INIT_TX
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  6
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000146 0E05           00180     movlw 0x05          ;llenamos el buffer con la direccion de los del pipe 0
 000148 6E??           00181     movwf BUFFER_DATA
 00014A 0E04           00182     movlw 0x04
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  7
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000034                00030 DELAY_10MS
 000034 0EFD           00031     movlw 0xFD
 000036 6E??           00032     movwf TMR0_COUNT+1
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  8
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ Warning[207]: Found label after column 1. (EXIT_ISR)
                       00044 
                       00045 
                       00046 MAIN_PROG CODE                  ;generamos la seccion de codigo de nuestro programa
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE  9
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -513,12 +513,12 @@ Warning[207]: Found label after column 1. (wait_adc)
 000028 AC9E           00079     btfss PIR1,ADIF
 00002A D???           00080     bra wait_adc
 00002C 9C9E           00081     bcf PIR1,ADIF
-00002E CFC4 F???      00082     movff ADRESH,BUFFER_DATA
-000032 CFC3 F???      00083     movff ADRESL,BUFFER_DATA+1
+00002E CFC4 F???      00082     movff ADRESH,BUFFER_DATA+1
+000032 CFC3 F???      00083     movff ADRESL,BUFFER_DATA
 000036 EC?? F???      00084     call NRF_SEND_DATA
 00003A D???           00085     bra read_adc                  ;esperamos las interrupciones
                       00086     END
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 10
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 10
 
 
 SYMBOL TABLE
@@ -577,7 +577,7 @@ BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
 BSR_TEMP                          00000002
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 11
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 11
 
 
 SYMBOL TABLE
@@ -636,7 +636,7 @@ CLKCFG1                           00000007
 CM0                               00000000
 CM1                               00000001
 CM2                               00000002
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 12
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 12
 
 
 SYMBOL TABLE
@@ -695,7 +695,7 @@ ECCPAS1                           00000005
 ECCPAS2                           00000006
 ECCPASE                           00000007
 EEADR                             00000FA9
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 13
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 13
 
 
 SYMBOL TABLE
@@ -754,7 +754,7 @@ GIEH                              00000007
 GIEL                              00000006
 GIE_GIEH                          00000007
 GO                                00000001
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 14
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 14
 
 
 SYMBOL TABLE
@@ -813,7 +813,7 @@ IOFS                              00000002
 IPEN                              00000007
 IPR1                              00000F9F
 IPR2                              00000FA2
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 15
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 15
 
 
 SYMBOL TABLE
@@ -872,7 +872,7 @@ LVDL1                             00000001
 LVDL2                             00000002
 LVDL3                             00000003
 LVV0                              00000000
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 16
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 16
 
 
 SYMBOL TABLE
@@ -931,7 +931,7 @@ PD                                00000002
 PDC0                              00000000
 PDC1                              00000001
 PDC2                              00000002
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 17
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 17
 
 
 SYMBOL TABLE
@@ -990,7 +990,7 @@ R                                 00000002
 RA0                               00000000
 RA1                               00000001
 RA2                               00000002
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 18
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 18
 
 
 SYMBOL TABLE
@@ -1049,7 +1049,7 @@ RESUME                            00000002
 RF_CH                             00000005
 RF_SETUP                          00000006
 RI                                00000004
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 19
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 19
 
 
 SYMBOL TABLE
@@ -1108,7 +1108,7 @@ SPPBUSY                           00000004
 SPPCFG                            00000F63
 SPPCON                            00000F65
 SPPDATA                           00000F62
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 20
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 20
 
 
 SYMBOL TABLE
@@ -1167,7 +1167,7 @@ T0PS2                             00000002
 T0SE                              00000004
 T13CKI                            00000000
 T1CKPS0                           00000004
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 21
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 21
 
 
 SYMBOL TABLE
@@ -1226,7 +1226,7 @@ TMR3                              00000FB2
 TMR3CS                            00000001
 TMR3H                             00000FB3
 TMR3IE                            00000001
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 22
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 22
 
 
 SYMBOL TABLE
@@ -1285,7 +1285,7 @@ TRMT                              00000001
 TRNIE                             00000003
 TRNIF                             00000003
 TUN0                              00000000
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 23
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 23
 
 
 SYMBOL TABLE
@@ -1344,7 +1344,7 @@ USBEN                             00000003
 USBIE                             00000005
 USBIF                             00000005
 USBIP                             00000005
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 24
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 24
 
 
 SYMBOL TABLE
@@ -1403,7 +1403,7 @@ _CP1_OFF_5L                       000000FF
 _CP1_ON_5L                        000000FD
 _CP2_OFF_5L                       000000FF
 _CP2_ON_5L                        000000FB
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 25
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 25
 
 
 SYMBOL TABLE
@@ -1462,7 +1462,7 @@ _IESO_ON_1H                       000000FF
 _LPT1OSC_OFF_3H                   000000FB
 _LPT1OSC_ON_3H                    000000FF
 _LVP_OFF_4L                       000000FB
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 26
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 26
 
 
 SYMBOL TABLE
@@ -1521,7 +1521,7 @@ _WRTC_OFF_6H                      000000FF
 _WRTC_ON_6H                       000000DF
 _WRTD_OFF_6H                      000000FF
 _WRTD_ON_6H                       0000007F
-MPASM 5.77                          MAIN.ASM   6-26-2020  18:00:37         PAGE 27
+MPASM 5.77                          MAIN.ASM   6-28-2020  13:32:36         PAGE 27
 
 
 SYMBOL TABLE
