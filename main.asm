@@ -60,7 +60,7 @@ START
     movlw 0x0E	;Voltages de referencia, vss y vdd, seleccionamos AN0 como analogo
     movwf ADCON1
     clrf ADCON0	;seleccionamos el canal AN0 y mantenemos apagado el ADC
-    movlw 0xB9
+    movlw 0x39
     movwf ADCON2
     bsf ADCON0,ADON
     ;configuro las interrupciones
